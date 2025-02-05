@@ -1,1 +1,1 @@
-# heuristics-searchs
+# heuristic-search
