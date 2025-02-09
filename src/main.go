@@ -10,7 +10,7 @@ func main() {
 	alphas := []float64{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}
 	ms := []int{10, 20, 50}
 	rValues := []float64{1.5, 2.0}
-	file, _ := os.Create("resultados_monotona.txt")
+	file, _ := os.Create("hs.txt")
 	defer file.Close()
 
 	fmt.Fprintf(file, "Heuristica,N,M,Replicacao,Tempo,Iteracoes,Valor,Parametro\n")
