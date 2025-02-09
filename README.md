@@ -33,13 +33,13 @@ Implement two algorithms for the Knight's Walk:
 #### Linux
 
 ```bash
-go build -o heuristic_searches src/main.go src/methods.go src/utils.go
+go build -o hs src/main.go src/methods.go src/utils.go
 ```
 
 #### Windows
 
 ```ps1
-go build -o heuristic_searches.exe src/main.go src/methods.go src/utils.go
+go build -o hs.exe src/main.go src/methods.go src/utils.go
 ```
 
 ### Test

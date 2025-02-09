@@ -1,12 +1,19 @@
 package main
 
 import (
+	"math"
 	"math/rand"
 	"time"
 )
 
+type Solution struct {
+	allocation []int
+	makespan     int;
+}
+
 func generateInstance(m int, r float64) ([]int, int) {
-	n := int(float64(m) * r)
+	n := int(math.Pow(float64(m), float64(r)))
+
 	tasks := make([]int, n)
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
@@ -17,7 +24,3 @@ func generateInstance(m int, r float64) ([]int, int) {
 	return tasks, n
 }
 
-type Solution struct {
-	allocation []int
-	makespan     int;
-}
