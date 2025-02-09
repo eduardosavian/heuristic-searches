@@ -77,3 +77,5 @@ For each run, the program will display:
 ## Bibliographic References
 
 [Metaheuristic](https://en.wikipedia.org/wiki/Metaheuristic)
+
+[UFRGS - Heuristícas](https://www.inf.ufrgs.br/~mrpritt/lib/exe/fetch.php?media=cmp268:notas-10488.pdf)
