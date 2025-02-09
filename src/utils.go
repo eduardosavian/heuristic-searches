@@ -20,7 +20,7 @@ func generateInstance(machines int, taskFactor float64) Instance {
     tasks := int(float64(machines) * taskFactor)
     jobTimes := make([]int, tasks)
     for i := range jobTimes {
-        jobTimes[i] = rand.Intn(100) + 1 
+        jobTimes[i] = rand.Intn(100) + 1
     }
     return Instance{machines, tasks, jobTimes}
 }
@@ -28,13 +28,13 @@ func generateInstance(machines int, taskFactor float64) Instance {
 func initialSolution(inst Instance) Solution {
     assignment := make([][]int, inst.Machines)
     machineLoad := make([]int, inst.Machines)
-    
+
     for i, jobTime := range inst.JobTimes {
         idx := i % inst.Machines
         assignment[idx] = append(assignment[idx], jobTime)
         machineLoad[idx] += jobTime
     }
-    
+
     return Solution{assignment, machineLoad, max(machineLoad)}
 }
 
