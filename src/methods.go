@@ -14,6 +14,23 @@ func randomNeighbor(solution []int, m int) []int {
 	return newSolution
 }
 
+func evaluate(solution []int, tasks []int, m int) int {
+	load := make([]int, m)
+
+	for i, machine := range solution {
+		load[machine] += tasks[i]
+	}
+
+	maxLoad := 0
+	for _, l := range load {
+		if l > maxLoad {
+			maxLoad = l
+		}
+	}
+
+	return maxLoad
+}
+
 func monotoneRandomSearch(tasks []int, m int, alpha float64) Solution {
 	n := len(tasks)
 	solution := make([]int, n)

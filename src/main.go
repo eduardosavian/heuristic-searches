@@ -6,24 +6,6 @@ import (
 	"time"
 )
 
-
-func evaluate(solution []int, tasks []int, m int) int {
-	load := make([]int, m)
-
-	for i, machine := range solution {
-		load[machine] += tasks[i]
-	}
-
-	maxLoad := 0
-	for _, l := range load {
-		if l > maxLoad {
-			maxLoad = l
-		}
-	}
-
-	return maxLoad
-}
-
 func main() {
 	alphas := []float64{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}
 	ms := []int{10, 20, 50}
@@ -31,7 +13,7 @@ func main() {
 	file, _ := os.Create("resultados_monotona.txt")
 	defer file.Close()
 
-	fmt.Fprintf(file, "heuristica,n,m,replicacao,tempo,iteracoes,valor,parametro\n")
+	fmt.Fprintf(file, "Heuristica,N,M,Replicacao,Tempo,Iteracoes,Valor,Parametro\n")
 
 	for _, m := range ms {
 		for _, r := range rValues {
