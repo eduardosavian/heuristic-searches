@@ -97,27 +97,6 @@ func monotoneSearch(tasks []int, m int) Solution {
     return best
 }
 
-/*
-
-func blmMelhor(tasks []int, m int, alpha float64) Solution {
-    return monotoneRandomSearch(tasks, m, alpha)
-}
-
-func blmMelhorMelhor(tasks []int, m int, alpha float64, iterations int) Solution {
-    bestOfBest := blmMelhor(tasks, m, alpha)
-
-    for i := 1; i < iterations; i++ {
-        candidate := blmMelhor(tasks, m, alpha)
-        if candidate.makespan < bestOfBest.makespan {
-            bestOfBest = candidate
-        }
-    }
-
-    return bestOfBest
-}
-
-*/
-
 func blmMelhorDeterministico(tasks []int, m int) Solution {
     return monotoneSearch(tasks, m)
 }
