@@ -1,49 +1,58 @@
 package main
 
 import (
-    "math/rand"
+	"math"
+	"math/rand"
+	"time"
 )
 
-type Instance struct {
-    Machines int
-    Tasks    int
-    JobTimes []int
+
+func generateInstance(m int, r float64) ([]int, int) {
+	n := int(math.Pow(float64(m), float64(r)))
+
+	tasks := make([]int, n)
+	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+	for i := range tasks {
+		tasks[i] = int(rng.Intn(100) + 1)
+	}
+
+	return tasks, n
 }
 
-type Solution struct {
-    Assignment [][]int
-    MachineLoad []int
-    Makespan   int
+func evaluate(solution []int, tasks []int, m int) int {
+	load := make([]int, m)
+
+	for i, machine := range solution {
+		load[machine] += tasks[i]
+	}
+
+	maxLoad := 0
+	for _, l := range load {
+		if l > maxLoad {
+			maxLoad = l
+		}
+	}
+
+	return maxLoad
 }
 
-func generateInstance(machines int, taskFactor float64) Instance {
-    tasks := int(float64(machines) * taskFactor)
-    jobTimes := make([]int, tasks)
-    for i := range jobTimes {
-        jobTimes[i] = rand.Intn(100) + 1
-    }
-    return Instance{machines, tasks, jobTimes}
-}
+func randomNeighbor(solution []int, m int) []int {
+	newSolution := make([]int, len(solution))
+	copy(newSolution, solution)
 
-func initialSolution(inst Instance) Solution {
-    assignment := make([][]int, inst.Machines)
-    machineLoad := make([]int, inst.Machines)
+	randIndex := rand.Intn(len(solution))
+	newSolution[randIndex] = rand.Intn(m)
 
-    for i, jobTime := range inst.JobTimes {
-        idx := i % inst.Machines
-        assignment[idx] = append(assignment[idx], jobTime)
-        machineLoad[idx] += jobTime
-    }
-
-    return Solution{assignment, machineLoad, max(machineLoad)}
+	return newSolution
 }
 
 func max(arr []int) int {
-    maxVal := arr[0]
-    for _, v := range arr {
-        if v > maxVal {
-            maxVal = v
-        }
-    }
-    return maxVal
+	maxVal := arr[0]
+	for _, v := range arr {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+	return maxVal
 }
