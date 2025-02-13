@@ -4,8 +4,8 @@ import (
     "math/rand"
 )
 
-
-func monotoneRandomSearch(tasks []int, m int, alpha float64) Solution {
+//  Non-Monotone Local Random Search
+func NMLRS(tasks []int, m int, alpha float64) Solution {
     n := len(tasks)
     solution := make([]int, n)
 
@@ -35,7 +35,8 @@ func monotoneRandomSearch(tasks []int, m int, alpha float64) Solution {
     return best
 }
 
-func monotoneSearch(tasks []int, m int) Solution {
+// Monotone Local Search
+func MLS(tasks []int, m int) Solution {
     n := len(tasks)
     solution := make([]int, n)
 
@@ -57,15 +58,17 @@ func monotoneSearch(tasks []int, m int) Solution {
     return best
 }
 
-func blmMelhorDeterministico(tasks []int, m int) Solution {
-    return monotoneSearch(tasks, m)
+// Monotone Local Search Best
+func MLSB(tasks []int, m int) Solution {
+    return MLS(tasks, m)
 }
 
-func blmMelhorMelhorDeterministico(tasks []int, m int, iterations int) Solution {
-    bestOfBest := blmMelhorDeterministico(tasks, m)
+// Monotone Local Search Best of Best
+func MLSBB(tasks []int, m int, iterations int) Solution {
+    bestOfBest := MLSB(tasks, m)
 
     for i := 1; i < iterations; i++ {
-        candidate := blmMelhorDeterministico(tasks, m)
+        candidate := MLSB(tasks, m)
         if candidate.makespan < bestOfBest.makespan {
             bestOfBest = candidate
         }

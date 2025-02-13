@@ -4,6 +4,8 @@ import (
 	"math"
 	"math/rand"
 	"time"
+	"os"
+	"fmt"
 )
 
 type Solution struct {
@@ -23,7 +25,6 @@ func generateInstance(m int, r float64) ([]int, int) {
 
 	return tasks, n
 }
-
 
 func randomNeighbor(solution []int, m int) []int {
     newSolution := make([]int, len(solution))
@@ -64,4 +65,26 @@ func evaluate(solution []int, tasks []int, m int) int {
     }
 
     return maxLoad
+}
+
+func createFiles() (*os.File, *os.File, *os.File, error) {
+    file1, err1 := os.Create("file1.txt")
+    if err1 != nil {
+        return nil, nil, nil, fmt.Errorf("erro ao criar file1: %v", err1)
+    }
+
+    file2, err2 := os.Create("file2.txt")
+    if err2 != nil {
+        file1.Close()
+        return nil, nil, nil, fmt.Errorf("erro ao criar file2: %v", err2)
+    }
+
+    file3, err3 := os.Create("file3.txt")
+    if err3 != nil {
+        file1.Close()
+        file2.Close()
+        return nil, nil, nil, fmt.Errorf("erro ao criar file3: %v", err3)
+    }
+
+    return file1, file2, file3, nil
 }
