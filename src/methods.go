@@ -4,6 +4,46 @@ import (
     "math/rand"
 )
 
+// Monotone Local Search
+func MLS(tasks []int, m int) Solution {
+    n := len(tasks)
+    solution := make([]int, n)
+
+    best := Solution{allocation: solution, makespan: evaluate(solution, tasks, m)}
+
+    for {
+        newSolution := nextNeighbor(best.allocation, m)
+        newMakespan := evaluate(newSolution, tasks, m)
+
+        if newMakespan < best.makespan {
+            best = Solution{allocation: newSolution, makespan: newMakespan}
+        } else {
+            break
+        }
+    }
+
+    return best
+}
+
+// Monotone Local Search Best
+func MLSB(tasks []int, m int) Solution {
+    return MLS(tasks, m)
+}
+
+// Monotone Local Search Best of Best
+func MLSBB(tasks []int, m int, iterations int) Solution {
+    bestOfBest := MLSB(tasks, m)
+
+    for i := 1; i < iterations; i++ {
+        candidate := MLSB(tasks, m)
+        if candidate.makespan < bestOfBest.makespan {
+            bestOfBest = candidate
+        }
+    }
+
+    return bestOfBest
+}
+
 //  Non-Monotone Local Random Search
 func NMLRS(tasks []int, m int, alpha float64) Solution {
     n := len(tasks)
@@ -33,45 +73,4 @@ func NMLRS(tasks []int, m int, alpha float64) Solution {
     }
 
     return best
-}
-
-// Monotone Local Search
-func MLS(tasks []int, m int) Solution {
-    n := len(tasks)
-    solution := make([]int, n)
-
-    best := Solution{allocation: solution, makespan: evaluate(solution, tasks, m)}
-
-    for {
-        newSolution := nextNeighbor(best.allocation, m)
-        newMakespan := evaluate(newSolution, tasks, m)
-
-        if newMakespan < best.makespan {
-            best = Solution{allocation: newSolution, makespan: newMakespan}
-        } else {
-            break
-        }
-    }
-
-    return best
-}
-
-
-// Monotone Local Search Best
-func MLSB(tasks []int, m int) Solution {
-    return MLS(tasks, m)
-}
-
-// Monotone Local Search Best of Best
-func MLSBB(tasks []int, m int, iterations int) Solution {
-    bestOfBest := MLSB(tasks, m)
-
-    for i := 1; i < iterations; i++ {
-        candidate := MLSB(tasks, m)
-        if candidate.makespan < bestOfBest.makespan {
-            bestOfBest = candidate
-        }
-    }
-
-    return bestOfBest
 }

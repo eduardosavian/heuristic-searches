@@ -67,24 +67,11 @@ func evaluate(solution []int, tasks []int, m int) int {
     return maxLoad
 }
 
-func createFiles() (*os.File, *os.File, *os.File, error) {
-    file1, err1 := os.Create("nmlrs.csv")
-    if err1 != nil {
-        return nil, nil, nil, fmt.Errorf("erro ao criar file1: %v", err1)
+func createFile() (*os.File, error) {
+    file, err := os.Create("hs.csv")
+    if err != nil {
+        return nil, fmt.Errorf("erro ao criar file: %v", err)
     }
 
-    file2, err2 := os.Create("mlsb.csv")
-    if err2 != nil {
-        file1.Close()
-        return nil, nil, nil, fmt.Errorf("erro ao criar file2: %v", err2)
-    }
-
-    file3, err3 := os.Create("mlsbb.csv")
-    if err3 != nil {
-        file1.Close()
-        file2.Close()
-        return nil, nil, nil, fmt.Errorf("erro ao criar file3: %v", err3)
-    }
-
-    return file1, file2, file3, nil
+    return file, nil
 }
