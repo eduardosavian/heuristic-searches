@@ -41,22 +41,21 @@ func MLS(tasks []int, m int) Solution {
     solution := make([]int, n)
 
     best := Solution{allocation: solution, makespan: evaluate(solution, tasks, m)}
-    iterationsWithoutImprovement := 0
 
-    for iterationsWithoutImprovement < 1000 {
+    for {
         newSolution := nextNeighbor(best.allocation, m)
         newMakespan := evaluate(newSolution, tasks, m)
 
         if newMakespan < best.makespan {
             best = Solution{allocation: newSolution, makespan: newMakespan}
-            iterationsWithoutImprovement = 0
         } else {
-            iterationsWithoutImprovement++
+            break
         }
     }
 
     return best
 }
+
 
 // Monotone Local Search Best
 func MLSB(tasks []int, m int) Solution {
