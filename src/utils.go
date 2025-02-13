@@ -68,18 +68,18 @@ func evaluate(solution []int, tasks []int, m int) int {
 }
 
 func createFiles() (*os.File, *os.File, *os.File, error) {
-    file1, err1 := os.Create("nmlrs.txt")
+    file1, err1 := os.Create("nmlrs.csv")
     if err1 != nil {
         return nil, nil, nil, fmt.Errorf("erro ao criar file1: %v", err1)
     }
 
-    file2, err2 := os.Create("mlsb.txt")
+    file2, err2 := os.Create("mlsb.csv")
     if err2 != nil {
         file1.Close()
         return nil, nil, nil, fmt.Errorf("erro ao criar file2: %v", err2)
     }
 
-    file3, err3 := os.Create("mlsbb.txt")
+    file3, err3 := os.Create("mlsbb.csv")
     if err3 != nil {
         file1.Close()
         file2.Close()

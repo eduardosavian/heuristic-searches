@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Leia os dados do arquivo
-data = pd.read_csv('mlsb.txt')
+data = pd.read_csv('mlsb.csv')
 
 # Plote os dados
 plt.figure(figsize=(10, 6))
