@@ -17,15 +17,15 @@ func main() {
             for run := 0; run < 10; run++ {
                 inst := generateInstance(machines, factor)
                 initSol := initialSolution(inst)
-                
+
                 start := time.Now()
                 sol1 := blPrimeiraMelhora(inst, initSol)
                 elapsed1 := time.Since(start)
-                
+
                 start = time.Now()
                 sol2 := blMelhorMelhora(inst, initSol)
                 elapsed2 := time.Since(start)
-                
+
                 fmt.Printf("Execução %d - Primeira Melhora: Makespan %d (%.10fs), Melhor Melhora: Makespan %d (%.10fs)\n",
                     run+1, sol1.Makespan, elapsed1.Seconds(), sol2.Makespan, elapsed2.Seconds())
             }
