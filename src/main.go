@@ -39,12 +39,12 @@ func main() {
 					start = time.Now()
 					bestSolution = MLSB(tasks, m)
 					duration = time.Since(start).Seconds()
-					fmt.Fprintf(file1, "mlsb,%d,%d,%d,%.4f,%d,%d,NA\n", n, m, rep, duration, 1000, bestSolution.makespan)
+					fmt.Fprintf(file2, "mlsb,%d,%d,%d,%.4f,%d,%d,NA\n", n, m, rep, duration, 1000, bestSolution.makespan)
 
 					start = time.Now()
 					bestSolution = MLSBB(tasks, m, 10)
 					duration = time.Since(start).Seconds()
-					fmt.Fprintf(file1, "mlsbb,%d,%d,%d,%.4f,%d,%d,NA\n", n, m, rep, duration, 1000, bestSolution.makespan)
+					fmt.Fprintf(file3, "mlsbb,%d,%d,%d,%.4f,%d,%d,NA\n", n, m, rep, duration, 1000, bestSolution.makespan)
 				}
 			}
 		}
