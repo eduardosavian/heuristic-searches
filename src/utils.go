@@ -24,3 +24,44 @@ func generateInstance(m int, r float64) ([]int, int) {
 	return tasks, n
 }
 
+
+func randomNeighbor(solution []int, m int) []int {
+    newSolution := make([]int, len(solution))
+    copy(newSolution, solution)
+
+    randIndex := rand.Intn(len(solution))
+    newSolution[randIndex] = rand.Intn(m)
+
+    return newSolution
+}
+
+func nextNeighbor(solution []int, m int) []int {
+    newSolution := make([]int, len(solution))
+    copy(newSolution, solution)
+
+    for i := range newSolution {
+        newSolution[i] = (newSolution[i] + 1) % m
+        if newSolution[i] != 0 {
+            break
+        }
+    }
+
+    return newSolution
+}
+
+func evaluate(solution []int, tasks []int, m int) int {
+    load := make([]int, m)
+
+    for i, machine := range solution {
+        load[machine] += tasks[i]
+    }
+
+    maxLoad := 0
+    for _, l := range load {
+        if l > maxLoad {
+            maxLoad = l
+        }
+    }
+
+    return maxLoad
+}
